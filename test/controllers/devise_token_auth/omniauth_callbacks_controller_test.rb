@@ -84,6 +84,11 @@ class OmniauthTest < ActionDispatch::IntegrationTest
         assert_equal false, post_message['new_record']
       end
 
+      test 'response contains new_record attr' do
+        post_message = JSON.parse(/postMessage\((?<data>.*), '\*'\);/m.match(response.body)[:data])
+        assert_equal false, post_message['new_record']
+      end
+
       test 'session vars have been cleared' do
         refute request.session['dta.omniauth.auth']
         refute request.session['dta.omniauth.params']
