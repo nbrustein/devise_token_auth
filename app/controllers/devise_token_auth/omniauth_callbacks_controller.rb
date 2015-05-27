@@ -67,6 +67,7 @@ module DeviseTokenAuth
 
       sign_in(:user, @resource, store: false, bypass: false)
 
+      @new_record = @resource.new_record?
       @resource.save!
 
       # render user info to javascript postMessage communication window
